@@ -9,6 +9,7 @@ const { color, bgcolor } = require('../lib/color')
 
 let setting = JSON.parse(fs.readFileSync('./setting.json'))
 prefix = setting.prefix
+apikey = setting.apikey
 
 module.exports = welcome = async (kotz, anu) => {
 	    const welkom = JSON.parse(fs.readFileSync('./database/welcome.json'))
@@ -39,7 +40,7 @@ module.exports = welcome = async (kotz, anu) => {
                 anu_user = v.vname || v.notify || num.split('@')[0]
                 time_wel = moment.tz('Asia/Jakarta').format("HH:mm")
                 teks = `Halo ${anu_user} \n\nNama : \nUmur :\nGender : \nAsal :\n\nSemoga Betah dan jangan lupa isi\nAnd Following Rules Group`
-	            buff = await getBuffer(`http://hadi-api.herokuapp.com/api/card/welcome?nama=${anu_user}&descriminator=${time_wel}&memcount=${memeg}&gcname=${encodeURI(mdata.subject)}&pp=${pp_user}&bg=https://i.postimg.cc/rFkw8MpX/IMG-20210807-151325.jpg`)
+	            buff = await getBuffer(`https://ogata-api.herokuapp.com/api/canvas/welcome?nama=${anu_user}&descriminator=${time_wel}&memcount=${memeg}&gcname=${encodeURI(mdata.subject)}&pp=${pp_user}&bg=https://i.ibb.co/V0yqScb/38cd7b8c3ba7292ddcba4bf53cb8964e.jpg&apikey=${apikey}`)
                 buttons = [{buttonId: `y`,buttonText:{displayText: 'Welcome👋'},type:1}]
                 imageMsg = (await kotz.prepareMessageMedia((buff), 'imageMessage', {thumbnail: buff})).imageMessage
                 buttonsMessage = { contentText: `${teks}`, footerText: 'Semoga betah ☕', imageMessage: imageMsg, buttons: buttons, headerType: 4 }
@@ -55,7 +56,7 @@ module.exports = welcome = async (kotz, anu) => {
                 time_wel = moment.tz('Asia/Jakarta').format("HH:mm")
                 memeg = mdata.participants.length
                 out = `Kenapa tuh? kok bisa keluar? \nSayonara ${anu_user} we will miss you`
-                buff = await getBuffer(`http://hadi-api.herokuapp.com/api/card/goodbye?nama=${anu_user}&descriminator=${time_wel}&memcount=${memeg}&gcname=${encodeURI(mdata.subject)}&pp=${pp_user}&bg=https://i.postimg.cc/rFkw8MpX/IMG-20210807-151325.jpg`)
+                buff = await getBuffer(`https://ogata-api.herokuapp.com/api/canvas/goodbye?nama=${anu_user}&descriminator=${time_wel}&memcount=${memeg}&gcname=${encodeURI(mdata.subject)}&pp=${pp_user}&bg=https://i.ibb.co/V0yqScb/38cd7b8c3ba7292ddcba4bf53cb8964e.jpg&apikey=${apikey}`)
                 buttons = [{buttonId: `y`,buttonText:{displayText: 'Sayonara👋'},type:1}]
                 imageMsg = (await kotz.prepareMessageMedia((buff), 'imageMessage', {thumbnail: buff})).imageMessage
                 buttonsMessage = { contentText: `${out}`, footerText: 'Nitip gorengan ya', imageMessage: imageMsg, buttons: buttons, headerType: 4 }
